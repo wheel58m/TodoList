@@ -7,7 +7,6 @@
  * TODO: Create AddTodo Method.
  * TODO: Create RemoveTodo Method.
  * TODO: Create EditTodo Method.
- * TODO: Create a DisplayTodoList Method.
 */
 
 // MAIN -----------------------------------------------------------------------/
@@ -46,7 +45,7 @@ while (true) {
     switch (key.KeyChar) {
         // Add Todo
         case '1':
-            // AddTodo();
+            AddTodo();
             break;
         // Remove Todo
         case '2':
@@ -83,4 +82,24 @@ void DisplayTodoList() {
         }
     }
     Console.WriteLine();
+}
+
+// METHOD: Add Todo -----------------------------------------------------------/
+void AddTodo() {
+    Console.Clear();
+    Console.WriteLine("What would you like to add to your Todo List?");
+    Console.Write("Enter a Todo: ");
+    string todo = Console.ReadLine();
+
+    // Check if Todo is Empty
+    if (todo == "") {
+        error = true;
+        message = "Todo Cannot Be Empty. Please Try Again.";
+        return;
+    }
+
+    // Add Todo to File
+    File.AppendAllText("todo-list.txt", $"{todo}\n");
+    message = "Todo Added Successfully!";
+    return;
 }
