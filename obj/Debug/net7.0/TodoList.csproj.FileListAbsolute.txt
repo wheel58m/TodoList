@@ -1,0 +1,15 @@
+/workspaces/TodoList/obj/Debug/net7.0/TodoList.csproj.AssemblyReference.cache
+/workspaces/TodoList/obj/Debug/net7.0/TodoList.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/TodoList/obj/Debug/net7.0/TodoList.AssemblyInfoInputs.cache
+/workspaces/TodoList/obj/Debug/net7.0/TodoList.AssemblyInfo.cs
+/workspaces/TodoList/obj/Debug/net7.0/TodoList.csproj.CoreCompileInputs.cache
+/workspaces/TodoList/bin/Debug/net7.0/TodoList
+/workspaces/TodoList/bin/Debug/net7.0/TodoList.deps.json
+/workspaces/TodoList/bin/Debug/net7.0/TodoList.runtimeconfig.json
+/workspaces/TodoList/bin/Debug/net7.0/TodoList.dll
+/workspaces/TodoList/bin/Debug/net7.0/TodoList.pdb
+/workspaces/TodoList/obj/Debug/net7.0/TodoList.dll
+/workspaces/TodoList/obj/Debug/net7.0/refint/TodoList.dll
+/workspaces/TodoList/obj/Debug/net7.0/TodoList.pdb
+/workspaces/TodoList/obj/Debug/net7.0/TodoList.genruntimeconfig.cache
+/workspaces/TodoList/obj/Debug/net7.0/ref/TodoList.dll
