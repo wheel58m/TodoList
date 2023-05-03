@@ -1,3 +1,3 @@
-Incomplete: Create Add Todo Method
-Incomplete: Create Remove Todo Method
-Incomplete: Add Edit Todo Method
+Complete: Create a Working Todo List Program
+Incomplete: Create a Separate Action Confirmation Method
+Incomplete: Clean Up Repeatitive Code

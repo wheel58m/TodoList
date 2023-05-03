@@ -4,7 +4,7 @@
 
 // NOTES ----------------------------------------------------------------------/
 /*
- * TODO: Create EditTodo Method.
+ *
 */
 
 // MAIN -----------------------------------------------------------------------/
@@ -95,11 +95,14 @@ void AddTodo() {
         return;
     }
 
+    // Add Status to Todo
+    todo = $"Incomplete: {todo}";
+
     // Add Todo to Memory
     todoList.Add(todo);
 
     // Add Todo to File
-    File.AppendAllText("todo-list.txt", $"Incomplete: {todo}\n");
+    File.AppendAllText("todo-list.txt", $"{todo}\n");
     message = "Todo Added Successfully!";
     return;
 }
@@ -243,15 +246,15 @@ void EditTodo() {
                         switch (key.KeyChar) {
                             // Mark Complete
                             case '1':
-                                // markComplete(todoList[selection - 1]);
-                                break;
+                                markComplete(todoList[selection - 1], selection - 1);
+                                return;
                             // Mark Incomplete
                             case '2':
-                                // markIncomplete(todoList[selection - 1]);
+                                markIncomplete(todoList[selection - 1] , selection - 1);
                                 break;
                             // Edit Todo
                             case '3':
-                                // edit();
+                                edit(todoList[selection - 1], selection - 1);
                                 break;
                             // Exit
                             case '4':
@@ -276,4 +279,79 @@ void EditTodo() {
             selectionMessage = "Selection Cannot Be Empty. Please Try Again.";
         }
     }   
+}
+
+// METHOD: Mark Complete ------------------------------------------------------/
+void markComplete(string todo, int position) {
+    // Mark Complete in Memory
+    todo = todo.Replace("Incomplete", "Complete");
+    todoList[position] = todo;
+
+    // Mark Complete in File
+    File.WriteAllLines("todo-list.txt", todoList);
+    message = "Todo Marked Complete Successfully!";
+    return;
+}
+
+// METHOD: Mark Incomplete ----------------------------------------------------/
+void markIncomplete(string todo, int position) {
+    // Mark Incomplete in Memory
+    todo = todo.Replace("Complete", "Incomplete");
+    todoList[position] = todo;
+
+    // Mark Incomplete in File
+    File.WriteAllLines("todo-list.txt", todoList);
+    message = "Todo Marked Incomplete Successfully!";
+    return;
+}
+
+// METHOD: Edit ---------------------------------------------------------------/
+void edit(string todo, int position) {
+    // Seperate Status & Todo -------------------------------------------------/
+    string[] todoArray = todo.Split(": ");
+    string status = todoArray[0];
+    todo = todoArray[1];
+
+    // Display Todo & Ask For New Todo ----------------------------------------/
+    bool editError = false;
+    string editMessage = null;
+
+    while (true) {
+        Console.Clear();
+
+        // Display Todo
+        Console.Write($"Current Todo: ");
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.WriteLine($"{todo}");
+        Console.ResetColor();
+
+        // Display Any Error Messages
+        if (editError) {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(editMessage);
+            Console.ResetColor();
+            editError = false;
+            editMessage = null;
+        }
+
+        // Ask For New Todo
+        Console.WriteLine();
+        Console.WriteLine("What would you like to change your Todo to?");
+        Console.Write("Enter a Todo: ");
+        string newTodo = Console.ReadLine();
+
+        // Check if Todo is Empty
+        if (newTodo == "") {
+            editError = true;
+            editMessage = "Todo Cannot Be Empty. Please Try Again.";
+        } else {
+            // Add Status to Todo
+            newTodo = $"{status}: {newTodo}";
+            // Edit Todo in Memory
+            todoList[position] = newTodo;
+            // Edit Todo in File
+            File.WriteAllLines("todo-list.txt", todoList);
+            return;
+        }
+    }
 }
