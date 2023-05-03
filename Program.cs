@@ -21,7 +21,7 @@ while (true) {
     // Display Todo List
     Console.WriteLine("Here is your Todo List:");
     Console.ForegroundColor = ConsoleColor.DarkGray;
-    DisplayTodoList();
+    DisplayTodoList(-1);
     Console.ResetColor();
 
     // Display Any Messages
@@ -68,16 +68,24 @@ while (true) {
 }
 
 // METHOD: Display Todo List --------------------------------------------------/
-void DisplayTodoList() {
-    // Check if Todo List is Empty
-    if (todoList.Count == 0) {
-        Console.WriteLine("Your Todo List is Empty!");
-    } else {
-        // Display Todo List
-        for (int i = 0; i < todoList.Count; i++) {
-            Console.WriteLine($"{i + 1}. {todoList[i]}");
+void DisplayTodoList(int position) {
+    Console.ForegroundColor = ConsoleColor.DarkGray;
+    // Display Entire List if Position is Not Specified
+    if (position == -1) {
+        // Check if Todo List is Empty
+        if (todoList.Count == 0) {
+            Console.WriteLine("Your Todo List is Empty!");
+        } else {
+            // Display Todo List
+            for (int i = 0; i < todoList.Count; i++) {
+                Console.WriteLine($"{i + 1}. {todoList[i]}");
+            }
         }
+    } else {
+        // Display Todo at Specified Position
+        Console.WriteLine($"{position + 1}. {todoList[position]}");
     }
+    Console.ResetColor();
     Console.WriteLine();
 }
 
@@ -118,9 +126,7 @@ void RemoveTodo() {
 
         // Display Todo List
         Console.WriteLine("Please Select a Todo to Remove:");
-        Console.ForegroundColor = ConsoleColor.DarkGray;
-        DisplayTodoList();
-        Console.ResetColor();
+        DisplayTodoList(-1);
 
         // Display Any Error Messages
         if (removalError) {
@@ -196,9 +202,7 @@ void EditTodo() {
 
         // Display Todo List
         Console.WriteLine("Please Select a Todo to Edit:");
-        Console.ForegroundColor = ConsoleColor.DarkGray;
-        DisplayTodoList();
-        Console.ResetColor();
+        DisplayTodoList(-1);
 
         // Display Any Error Messages
         if (selectionError) {
@@ -224,9 +228,7 @@ void EditTodo() {
                         Console.Clear();
 
                         // Display Todo
-                        Console.ForegroundColor = ConsoleColor.DarkGray;
-                        Console.WriteLine($"{selection}. {todoList[selection - 1]}");
-                        Console.ResetColor();
+                        DisplayTodoList(selection - 1);
 
                         // Display Any Messages
                         if (editError) {
