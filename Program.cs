@@ -4,7 +4,6 @@
 
 // NOTES ----------------------------------------------------------------------/
 /*
- * TODO: Create RemoveTodo Method.
  * TODO: Create EditTodo Method.
 */
 
@@ -55,7 +54,7 @@ while (true) {
             break;
         // Edit Todo
         case '3':
-            // EditTodo();
+            EditTodo();
             break;
         // Exit
         case '4':
@@ -181,4 +180,100 @@ void RemoveTodo() {
             removalMessage = "Selection Cannot Be Empty. Please Try Again.";
         }
     }
+}
+
+// METHOD: Edit Todo ----------------------------------------------------------/
+void EditTodo() {
+    // Display Todo List & Ask For Selection ----------------------------------/
+    bool selectionError = false;
+    string selectionMessage = null;
+
+    while (true) {
+        Console.Clear();
+
+        // Display Todo List
+        Console.WriteLine("Please Select a Todo to Edit:");
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        DisplayTodoList();
+        Console.ResetColor();
+
+        // Display Any Error Messages
+        if (selectionError) {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(selectionMessage);
+            Console.ResetColor();
+            selectionError = false;
+            selectionMessage = null;
+        }
+        // Ask For Selection
+        Console.Write("Enter a Number: ");
+        string selectionString = Console.ReadLine();
+
+        // Check For Valid Selection
+        if (selectionString != "") {
+            if (int.TryParse(selectionString, out int selection)) {
+                if (selection > 0 && selection <= todoList.Count) {
+                    // Display Todo & Edit Options
+                    bool editError = false;
+                    string editMessage = null;
+
+                    while (true) {
+                        Console.Clear();
+
+                        // Display Todo
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine($"{selection}. {todoList[selection - 1]}");
+                        Console.ResetColor();
+
+                        // Display Any Messages
+                        if (editError) {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(editMessage);
+                            Console.ResetColor();
+                            error = false;
+                            message = null;
+                        }
+
+                        // Display Options
+                        Console.WriteLine();
+                        Console.WriteLine("What would you like to do? (1) Mark as Complete, (2) Mark as Incomplete, (3) Edit Todo, (4) Exit");
+                        Console.Write("Enter a Number: ");
+                        ConsoleKeyInfo key = Console.ReadKey();
+                        
+                        switch (key.KeyChar) {
+                            // Mark Complete
+                            case '1':
+                                // markComplete(todoList[selection - 1]);
+                                break;
+                            // Mark Incomplete
+                            case '2':
+                                // markIncomplete(todoList[selection - 1]);
+                                break;
+                            // Edit Todo
+                            case '3':
+                                // edit();
+                                break;
+                            // Exit
+                            case '4':
+                                Console.Clear();
+                                return;
+                            default:
+                                editError = true;
+                                editMessage = "Invalid Input. Please Try Again.";
+                                break;
+                        }
+                    }
+                } else {
+                    selectionError = true;
+                    selectionMessage = "Selection Must Be an Existing Todo. Please Try Again.";
+                }
+            } else {
+                selectionError = true;
+                selectionMessage = "Input Must Be a Number. Please Try Again.";
+            }
+        } else {
+            selectionError = true;
+            selectionMessage = "Selection Cannot Be Empty. Please Try Again.";
+        }
+    }   
 }
